@@ -1,17 +1,7 @@
 language: ruby
 cache: bundler
+
 rvm:
   - 2.1.2
 
-env:
-#  - DB=sqlite
-#  - DB=mysql
-  - DB=postgresql
-
-before_script:
-  - sudo apt-get install graphicsmagick
-#  - mysql -e 'create database chromotype_test'
-  - psql -c 'create database inventorymaster_test' -U postgres
-
-script:
-  - GEONAMES_USER=jcottobboni_ci RAILS_ENV=test bundle exec rake --trace db:migrate test:all
+script: 'bundle exec rake'
