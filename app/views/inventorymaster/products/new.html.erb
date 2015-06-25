@@ -1,0 +1,59 @@
+<h1>Novo Produto</h1>
+
+<%= form_for(@product) do |f| %>
+  <% if @product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+      <% @product.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name ,"Nome"%><br>
+    <%= f.text_field :name,:required=>true %>
+  </div>
+  <div class="field">
+    <%= f.label :sku ,"SKU"%><br>
+    <%= f.text_field :sku %> <i>se você deixar este campo em branco sera gerado um número automaticamente</i>
+  </div>
+  <div class="field">
+    <%= f.label :upc,"UPC" %><br>
+    <%= f.text_field :upc %>
+  </div>
+  <div class="field">
+    <%= f.label :summary ,"Descrição"%><br>
+    <%= f.text_area :summary %>
+  </div>
+  <div class="field">
+    <%= f.label :labels,"Labels" %><br>
+    <%= f.text_field :labels %>
+  </div>
+   <div class="field">
+    <%= f.label :location_id ,"Localização do Estoque"%><br>
+    <%= f.select :location_id , @locations.collect { |c| [ c.name, c.id ] }%>
+  </div>
+ <div class="field">
+    <%= f.label :area_id ,"Area"%><br>
+      <%= f.select :area_id , @areas.collect { |c| [ c.name, c.id ] } %>
+  </div>
+  <div class="field">
+    <%= f.label :manufacturer_id,"Fabricante" %><br>
+      <%= f.select :manufacturer_id , @manufactures.collect { |c| [ c.name, c.id ] } %>
+  </div>
+  <div class="field">
+    <%= f.label :minimum_stock_count,"Estoque Minimo" %><br>
+    <%= f.number_field :minimum_stock_count %>
+  </div>
+
+
+  <div class="actions">
+    <%= f.submit "Gravar",:class=>"btn btn-success"%>
+<% end %>
+
+
+<%= link_to 'Voltar', products_path ,:class=>"btn btn-default" %>

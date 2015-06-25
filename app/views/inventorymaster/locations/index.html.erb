@@ -1,0 +1,36 @@
+ <div class="page-header">
+  <h3><span class="glyphicon glyphicon-users"></span> Localização</h3>
+</div>
+<div align="right"><%= link_to 'Inserir Localização', new_location_path ,:class=>"btn btn-primary"%></div>
+<br>
+<div class="table-responsive">
+<table class="table table-condesed">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Logradouro</th>
+      <th>Cidade</th>
+      <th>Estado</th>
+      <th>CEP</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @locations.each do |location| %>
+      <tr>
+        <td><%= location.name %></td>
+        <td><%= location.street_adress %></td>
+        <td><%= location.city %></td>
+        <td><%= location.state %></td>
+        <td><%= location.zip_code %></td>
+        <td><%= link_to 'Detalhar', location ,:class=>"btn btn-xs btn-default"%></td>
+        <td><%= link_to 'Editar', edit_location_path(location) ,:class=>"btn btn-xs btn-warning"%></td>
+        <td><%= link_to 'Deletar', location, method: :delete, data: { confirm: 'Are you sure?' } ,:class=>"btn btn-xs btn-danger"%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<br>
+

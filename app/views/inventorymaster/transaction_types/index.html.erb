@@ -1,0 +1,29 @@
+ <div class="page-header">
+  <h3><span class="glyphicon glyphicon-users"></span> Tipos de Transações</h3>
+</div>
+<div align="right"><%= link_to 'Inserir Tipo de Transação', new_transaction_type_path ,:class=>"btn btn-primary"%></div>
+<br>
+<div class="table-responsive">
+<table class="table table-condesed">
+
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @transaction_types.each do |transaction_type| %>
+      <tr>
+        <td><%= transaction_type.name %></td>
+        <td><%= link_to 'Detalhar', transaction_type,:class=>"btn btn-xs btn-default" %></td>
+        <td><%= link_to 'Editar', edit_transaction_type_path(transaction_type) ,:class=>"btn btn-xs btn-warning"%></td>
+        <td><%= link_to 'Deletar', transaction_type, method: :delete, data: { confirm: 'Voce tem Certeza?' } ,:class=>"btn btn-xs btn-danger"%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<br>
+

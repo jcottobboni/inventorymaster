@@ -1,0 +1,100 @@
+
+<div class="container">
+  <div class="row">
+    <%= form_tag products_path, :class=> "form-inline", method: :get do%>
+    <div class="col-md-12">
+            <div class="input-group" id="adv-search">
+               <div class="input-group-btn">
+                    <div class="btn-group" role="group">
+                       <% if params[:query].present?%>
+                          <%= link_to "limpar", products_path, :class=> "btn btn-default"%>
+                      <%end%>
+                    </div>
+                </div>
+                <%= text_field_tag :query, params[:query], :class=> "form-control", :id=> "product_search", :autocomplete=> "off"%>
+                <div class="input-group-btn">
+                    <div class="btn-group" role="group">
+                       <%= submit_tag "Pesquisar", :class=> "btn btn-primary"%>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+  </div>
+</div>
+
+<%end%>
+
+
+
+
+
+
+
+
+
+<div align="right"><%= link_to 'Inserir Produto', new_product_path ,:class=>"btn btn-primary"%></div>
+<br>
+<div class="table-responsive">
+<table class="table table-condesed">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>SKU</th>
+      <th>Área</th>
+      <th>Fabricante</th>
+      <th>EM</th>
+      <th>EA</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @products.each do |product| %>
+        <%if product.minimum_stock_count.present?%>
+              <%if product.ammount < product.minimum_stock_count%>
+                <tr class="danger">
+              <%else%>
+                <tr>
+              <%end%>
+        <%else%>
+            <%if product.ammount < Inventorymaster::Setting.find(1).minimum_stock_count%>
+                <tr class="danger">
+              <%else%>
+                <tr>
+              <%end%>
+        <%end%>
+
+        <td><%= product.name.upcase %></td>
+        <td><%if product.sku.present?%><%= product.sku %><%else%>-<%end%></td>
+        <td><%= product.area.name unless product.area.nil? %></td>
+        <td><%= product.manufacturer.name unless product.manufacturer.nil?%></td>
+        <td><span class="label label-warning"><%= product.minimum_stock_count %></span></td>
+        <td><span class="label label-primary"><%= product.ammount %></span></td>
+        <td><%= link_to 'Detalhar', product ,:class=>"btn btn-xs btn-default"%></td>
+        <td>
+  <%= form_tag({:controller=>'transactions',:action=>'new'}, {:method => :get}) do %>
+    <%= hidden_field_tag 'product_id',nil,:value => product.id%>
+    <%= hidden_field_tag 'kind',nil,:value => "Entrada"%>
+    <%= submit_tag("+ Entrada", :class => 'btn btn-xs btn-success') %>
+  <% end %>
+</td>
+<td>
+  <%= form_tag({:controller=>'transactions',:action=>'new'}, {:method => :get}) do %>
+    <%= hidden_field_tag 'product_id',nil,:value => product.id%>
+    <%= hidden_field_tag 'kind',nil,:value => "Saida"%>
+    <%= submit_tag("+ Saida", :class => 'btn btn-xs btn-danger') %>
+  <% end %>
+  </td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<br>
+<center><%= paginate @products %></center>
+
+<span class="label label-warning">EM - Estoque Mínimo</span>
+<span class="label label-primary">EA - Estoque Atual</span>
+<span class="label label-info">Stock Keeping Unit (SKU) - Unidade de Manutenção de Estoque</span>

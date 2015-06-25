@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  stok_alerts: false
+  minimum_stock_count: 1
+  currency: MyString
+
+two:
+  stok_alerts: false
+  minimum_stock_count: 1
+  currency: MyString

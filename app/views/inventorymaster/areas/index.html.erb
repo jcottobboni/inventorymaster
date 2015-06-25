@@ -1,0 +1,29 @@
+ <div class="page-header">
+  <h3><span class="glyphicon glyphicon-users"></span> Areas</h3>
+</div>
+<div align="right"><%= link_to 'Inserir Area', new_area_path ,:class=>"btn btn-primary"%></div>
+<br>
+<div class="table-responsive">
+<table class="table table-condesed">
+
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @areas.each do |area| %>
+      <tr>
+        <td><%= area.name %></td>
+        <td><%= link_to 'Detalhar', area ,:class=>"btn btn-xs btn-default"%></td>
+        <td><%= link_to 'Editar', edit_area_path(area) ,:class=>"btn btn-xs btn-warning"%></td>
+        <td><%= link_to 'Deletar', area, method: :delete, data: { confirm: 'Are you sure?' },:class=>"btn btn-xs btn-danger" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<br>
+

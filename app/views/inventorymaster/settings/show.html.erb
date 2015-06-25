@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Stok alerts:</strong>
+  <%= @setting.stok_alerts %>
+</p>
+
+<p>
+  <strong>Minimum stock count:</strong>
+  <%= @setting.minimum_stock_count %>
+</p>
+
+<p>
+  <strong>Currency:</strong>
+  <%= @setting.currency %>
+</p>
+
+<%= link_to 'Edit', edit_setting_path(@setting) %> |
+<%= link_to 'Back', settings_path %>

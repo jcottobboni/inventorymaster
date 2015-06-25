@@ -1,0 +1,28 @@
+<%= form_for(@setting) do |f| %>
+  <% if @setting.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@setting.errors.count, "error") %> prohibited this setting from being saved:</h2>
+
+      <ul>
+      <% @setting.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :stok_alerts ,'Alertas de Estoque'%><br>
+    <%= f.check_box :stok_alerts %>
+  </div>
+  <div class="field">
+    <%= f.label :minimum_stock_count ,"Estoque minimo padrão"%><br>
+    <%= f.number_field :minimum_stock_count %>
+  </div>
+  <div class="field">
+    <%= f.label :currency ,"Moeda"%><br>
+    <%= f.text_field :currency %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Gravar",:class=>'btn btn-success'%>
+<% end %>

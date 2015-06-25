@@ -1,0 +1,38 @@
+<style type="text/css">
+<%= Rails.application.assets.find_asset('bootstrap_and_overrides.css.less').to_s.html_safe %>
+</style>
+<%@average=0%>
+<%@cost=0%>
+<center><h3>Movimentações de produtos por Meses</h3></center>
+
+<div class="table-responsive">
+
+ <% @moviments_months.sort.each do |month, moviments| %>
+  <center><h2><%= month.strftime('%B') %></center>
+  <table class="table table-striped" style="text-align:center;">
+<tr style="font-weight: bold;">
+  <td>Produto</td>
+  <td>Tipo</td>
+  <td>Data</td>
+  <td>Usuário</td>
+  <td>Custo Unitário</td>
+  <td>Valor de Venda</td>
+  <td>QTD</td>
+  <td>Custo Médio</td>
+</tr>
+  <% for moviment in moviments %>
+  <tr>
+    <td><%if moviment.product.present?%><%=moviment.product.name%><%else%>Produto Excluído<%end%></td>
+    <td><%=moviment.kind%></td>
+    <td><%=moviment.date.strftime("%d/%m/%Y")%></td>
+    <td><%if moviment.user.present?%><%=moviment.user.first_name %><%else%><center>-</center><%end%></td>
+    <td><%if moviment.unit_cost.present?%><%=number_to_currency(moviment.unit_cost,:precision=>2)%><%else%><center>-</center><%end%></td>
+    <td><%if moviment.unit_sale.present?%><%=number_to_currency(moviment.unit_sale,:precision=>2)%><%else%><center>-</center><%end%></td>
+    <td><%if moviment.kind == "Saida"%><font color="red">-</font><%else%><font color="blue">+</font><%end%><%=moviment.ammount%></td>
+    <td><%=number_to_currency(average_cost(moviment.unit_cost,moviment.ammount),:precision=>2)%></td>
+  </tr>
+<% end %>
+</table>
+<% end %>
+</table>
+</div>

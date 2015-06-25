@@ -1,0 +1,18 @@
+
+<p>
+  <strong>Alertas de estoque:</strong>
+  <%= @setting.stok_alerts %>
+</p>
+
+<p>
+  <strong>Estoque minimo padrão:</strong>
+  <%= @setting.minimum_stock_count %>
+</p>
+
+<p>
+  <strong>Moeda:</strong>
+  <%= @setting.currency %>
+</p>
+
+<%= link_to 'Editar', edit_setting_path(@setting) ,:class=>'btn btn-warning'%> |
+<%= link_to 'Voltar', settings_path,:class=>'btn btn-default' %>

@@ -1,0 +1,9 @@
+
+
+<p>
+  <strong>Nome:</strong>
+  <%= @transaction_type.name %>
+</p>
+
+<%= link_to 'Editar', edit_transaction_type_path(@transaction_type) ,:class=>"btn btn-warning" %> |
+<%= link_to 'Voltar', transaction_types_path ,:class=>"btn btn-default" %>

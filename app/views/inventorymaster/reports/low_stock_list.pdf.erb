@@ -1,0 +1,52 @@
+<style type="text/css">
+<%= Rails.application.assets.find_asset('bootstrap_and_overrides.css.less').to_s.html_safe %>
+</style>
+<center><h3>Items com estoque Baixo</h3></center>
+<div class="table-responsive">
+<table class="table table-condesed">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>SKU</th>
+      <th>Localização</th>
+      <th>Área</th>
+      <th>Fabricante</th>
+      <th>EM</th>
+      <th>EA</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @products.each do |product| %>
+        <%if product.minimum_stock_count.present?%>
+              <%if product.ammount < product.minimum_stock_count%>
+                <tr class="danger">
+              <%else%>
+                <tr>
+              <%end%>
+        <%else%>
+            <%if product.ammount < Inventorymaster::Setting.find(1).minimum_stock_count%>
+                <tr class="danger">
+              <%else%>
+                <tr>
+              <%end%>
+        <%end%>
+
+        <td><%= product.name.upcase %></td>
+        <td><%if product.sku.present?%><%= product.sku %><%else%>-<%end%></td>
+        <td><%= product.location.name unless product.location.nil? %></td>
+        <td><%= product.area.name unless product.area.nil? %></td>
+        <td><%= product.manufacturer.name unless product.manufacturer.nil?%></td>
+        <td><span class="label label-warning"><%= product.minimum_stock_count %></span></td>
+        <td><span class="label label-primary"><%= product.ammount %></span></td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<br>
+<br>
+<span class="label label-warning">EM - Estoque Mínimo</span>
+<span class="label label-primary">EA - Estoque Atual</span>
+<span class="label label-info">Stock Keeping Unit (SKU) - Unidade de Manutenção de Estoque</span>

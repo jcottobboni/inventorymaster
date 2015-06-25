@@ -1,0 +1,120 @@
+
+
+<table >
+  <tr>
+    <td><%= link_to 'Voltar', products_path,:class=>"btn btn-default btn-xs" %></td>
+    <td>&nbsp;</td>
+    <td><%= link_to 'Editar', edit_product_path(@product) ,:class=>"btn btn-xs btn-warning"%></td>
+    <td>&nbsp;</td>
+    <td><%= link_to 'Deletar', @product, method: :delete, data: { confirm: 'Voce tem Certeza?' },:class=>"btn btn-xs btn-danger" %></td>
+    <td>&nbsp;</td>
+    <td>
+        <%= form_tag({:controller=>'transactions',:action=>'new'}, {:method => :get}) do %>
+    <%= hidden_field_tag 'product_id',nil,:value => @product.id%>
+    <%= hidden_field_tag 'kind',nil,:value => "Entrada"%>
+    <%= submit_tag("+ Entrada", :class => 'btn btn-xs btn-success') %>
+  <% end %>
+
+
+    </td>
+    <td>&nbsp;</td>
+    <td>
+        <%= form_tag({:controller=>'transactions',:action=>'new'}, {:method => :get}) do %>
+    <%= hidden_field_tag 'product_id',nil,:value => @product.id%>
+    <%= hidden_field_tag 'kind',nil,:value => "Saida"%>
+    <%= submit_tag("+ Saida", :class => 'btn btn-xs btn-danger') %>
+  <% end %>
+
+    </td>
+    <td>&nbsp;</td>
+    <td><%=link_to 'Gerar Relatório Produto', product_path(@product, :format => :pdf),:class=>"btn btn-info btn-xs"%></td>
+  </tr>
+</table>
+
+
+
+
+<br>
+<br>
+  <p>
+  <strong>Quantidade em Estoque:</strong>
+  <span class="label label-primary"><%= @product.ammount %></span>
+</p>
+<p>
+  <strong>Nome:</strong>
+  <%= @product.name.upcase %>
+</p>
+
+<p>
+  <strong>SKU:</strong>
+  <%= @product.sku %>
+</p>
+
+<p>
+  <strong>UPC:</strong>
+  <%= @product.upc %>
+</p>
+
+<p>
+  <strong>Descrição:</strong>
+  <%= @product.summary %>
+</p>
+
+<p>
+  <strong>Labels:</strong>
+  <%= @product.labels %>
+</p>
+
+<p>
+  <strong>Area:</strong>
+  <%= @product.area.name%>
+</p>
+
+<p>
+  <strong>Fabricante:</strong>
+  <%= @product.manufacturer.name %>
+</p>
+
+<p>
+  <strong>Estoque Minimo:</strong>
+  <%= @product.minimum_stock_count %>
+</p>
+
+<%@average=0%>
+<%@cost=0%>
+
+<hr>
+<div class="table-responsive">
+<table class="table table-striped" style="text-align:left;">
+<tr style="font-weight: bold;">
+  <td>Tipo</td>
+  <td>Data</td>
+  <td>Usuário</td>
+  <td>UPC</td>
+  <td>Custo Unitário</td>
+  <td>Valor de Venda</td>
+  <td>QTD</td>
+  <td>Custo Médio</td>
+  <td>Motivo</td>
+</tr>
+<%@product.transactions.order("created_at ASC").each do |transaction|%>
+  <tr>
+    <td><%=transaction.kind%></td>
+    <td><%=transaction.date.strftime("%d/%m/%Y")%></td>
+    <td><%=transaction.user.first_name unless transaction.user.nil?%></td>
+    <td><%if transaction.upc.present?%><%=transaction.upc%><%else%>-<%end%></td>
+    <td><%=number_to_currency(transaction.unit_cost,:precision=>2)%></td>
+    <td><%=number_to_currency(transaction.unit_sale,:precision=>2)%></td>
+    <td><%if transaction.kind == "Saida"%><font color="red">-</font><%else%><font color="blue">+</font><%end%><%=transaction.ammount%></td>
+    <td><%=number_to_currency(average_cost(transaction.unit_cost,transaction.ammount),:precision=>2)%></td>
+    <td><%=transaction.transaction_type.name unless transaction.transaction_type.nil?%></td>
+  </tr>
+
+<%end%>
+</table>
+</div>
+
+
+
+
+

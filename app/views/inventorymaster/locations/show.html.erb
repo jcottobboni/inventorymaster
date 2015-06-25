@@ -1,0 +1,28 @@
+
+<p>
+  <strong>Nome:</strong>
+  <%= @location.name %>
+</p>
+
+<p>
+  <strong>Logradouro:</strong>
+  <%= @location.street_adress %>
+</p>
+
+<p>
+  <strong>Cidade:</strong>
+  <%= @location.city %>
+</p>
+
+<p>
+  <strong>Estado:</strong>
+  <%= @location.state %>
+</p>
+
+<p>
+  <strong>CEP:</strong>
+  <%= @location.zip_code %>
+</p>
+
+<%= link_to 'Editar', edit_location_path(@location) ,:class=>"btn btn-warning"%> |
+<%= link_to 'Voltar', locations_path ,:class=>"btn btn-default"%>

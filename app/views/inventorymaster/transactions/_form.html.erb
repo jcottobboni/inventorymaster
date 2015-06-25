@@ -1,0 +1,63 @@
+<%= form_for(@transaction) do |f| %>
+  <% if @transaction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+
+      <ul>
+      <% @transaction.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :user_id, :value => current_user.id %>
+
+  <div class="field" style="display:none;">
+    <%= f.label :product_id ,"Produto"%><br>
+    <%= f.select :product_id , @products.collect { |c| [ c.name, c.id ] },:prompt => 'Selecione um Produto' %>
+  </div>
+  <div class="field" style="display:none;">
+    <%= f.label :kind %><br>
+    <%= f.select(:kind, ['Entrada', 'Saida']) %>
+  </div>
+  <div class="field">
+    <%= f.label :date, "Data"%><br>
+    <%= f.date_select :date %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :upc ,"UPC"%><br>
+    <%= f.text_field :upc %>
+  </div>
+
+  <div class="field">
+    <%= f.label :unit_cost,"Custo Unitário" %><br>
+    <%= f.text_field :unit_cost %>
+  </div>
+  <div class="field">
+    <%= f.label :unit_sale ,"Preço de Venda"%><br>
+    <%= f.text_field :unit_sale %>
+  </div>
+  <div class="field">
+    <%= f.label :ammount ,"Quantidade"%><br>
+    <%= f.number_field :ammount ,:required=>true%>
+  </div>
+
+  <div class="field">
+    <%= f.label :comment ,"Comentário"%><br>
+    <%= f.text_field :comment %>
+  </div>
+  <div class="field">
+    <%= f.label :serial_number ,"Número Serial"%><br>
+    <%= f.text_field :serial_number %>
+  </div>
+  <div class="field">
+    <%= f.label :transaction_type_id ,"Tipo da Transação"%><br>
+     <%= f.select :transaction_type_id , @transactiontypes.collect { |c| [ c.name, c.id ] },{ :include_blank => '-- Selecione um Tipo --' }, :required => true %>
+  </div>
+  <br>
+  <div class="actions">
+    <%= f.submit "Gravar",:class=>"btn btn-success"%>
+<% end %>

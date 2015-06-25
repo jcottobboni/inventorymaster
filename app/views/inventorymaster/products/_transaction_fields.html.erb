@@ -1,0 +1,52 @@
+<%item.hidden_field :user_id,:value=>current_user.id%>
+
+  <div class="field">
+    <%= item.label :product_id ,"Produto"%><br>
+    <%= item.select :product_id , @products.collect { |c| [ c.name, c.id ] },:prompt => 'Selecione um Produto' %>
+  </div>
+  <div class="field">
+    <%= item.label :kind %><br>
+    <%= item.select :kind, options_for_select(["Selecione um", "Entrada", "Saida"],:disabled => ["Selecione um"]) %>
+  </div>
+  <div class="field">
+    <%= item.label :date %><br>
+    <%= item.date_select :date %>
+  </div>
+  <div class="field">
+    <%= item.label :location_id %><br>
+    <%= item.select :location_id , @locations.collect { |c| [ c.name, c.id ] },:prompt => 'Selecione um Produto' %>
+  </div>
+ 
+  <div class="field">
+    <%= item.label :upc %><br>
+    <%= item.text_field :upc %>
+  </div>
+  <div class="field">
+    <%= item.label :unit_cost %><br>
+    <%= item.text_field :unit_cost %>
+  </div>
+  <div class="field">
+    <%= item.label :unit_sale %><br>
+    <%= item.text_field :unit_sale %>
+  </div>
+  <div class="field">
+    <%= item.label :ammount %><br>
+    <%= item.number_field :ammount %>
+  </div>
+  <div class="field">
+    <%= item.label :average_cost %><br>
+    <%= item.text_field :average_cost %>
+  </div>
+ 
+  <div class="field">
+    <%= item.label :comment %><br>
+    <%= item.text_field :comment %>
+  </div>
+  <div class="field">
+    <%= item.label :serial_number %><br>
+    <%= item.text_field :serial_number %>
+  </div>
+  <div class="field">
+    <%= item.label :transaction_type_id %><br>
+     <%= item.select :transaction_type_id , @transactiontypes.collect { |c| [ c.name, c.id ] },:prompt => 'Selecione um tipo ' %>
+  </div>

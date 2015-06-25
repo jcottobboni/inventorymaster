@@ -1,0 +1,105 @@
+
+# inventorymaster  {<img src="https://gemnasium.com/jcottobboni/inventorymaster.svg" alt="Dependency Status" />}[https://gemnasium.com/jcottobboni/inventorymaster] {<img src="https://codeclimate.com/github/jcottobboni/inventorymaster/badges/gpa.svg" />}[https://codeclimate.com/github/jcottobboni/inventorymaster]
+
+Inventory master provides a engine for implements basic inventory system control.
+
+Documentation
+-------------
+
+You should find the documentation for your version of inventorymaster on [Rubygems](https://rubygems.org/gems/inventorymaster).
+
+
+Install
+--------
+
+```ruby
+gem install inventorymaster
+```
+or add the following line to Gemfile:
+
+```ruby
+gem 'inventorymaster'
+```
+and run `bundle install` from your shell.After this all migrations inside a engine stay displonible in main 
+
+and run `rake db:migrate` from your shell
+
+Add to your routes file.
+```ruby
+mount Inventorymaster::Engine, :at => '/stok'
+```
+Aftere this the system is ready paste this code in application.html.erb to see and navigate in the app.
+
+```html
+<li><a href="/stok/locations">Locals</a></li>
+<li><a href="/stok/areas">Areas</a></li>
+<li><a href="/stok/manufacturers">Manufactures</a></li>
+<li><a href="/stok/settings">Settings</a></li>
+<li><a href="/stok/products">Products</a></li>
+<li><a href="/stok/transaction_types">Transactions Type</a></li>
+<li><a href="/stok/reports">Reports Type</a></li>
+```
+Supported Ruby versions
+-----------------------
+
+The inventorymaster supports rails 4.X.
+
+For search in products
+-----------------------
+You need install Elastic search first
+
+I follow this tuto www.digitalocean.com/community/tutorials/how-to-install-elasticsearch-logstash-and-kibana-4-on-ubuntu-14-04
+
+Add this style raw.githubusercontent.com/grk/bookstore-example/master/app/assets/stylesheets/typeahead.css
+
+Add this javascript <%= javascript_include_tag '//cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.9.3/typeahead.min.js', 'data-turbolinks-track' => true %>
+
+Add this gem gem “searchkick”
+
+And start javascript search
+
+$ ->
+
+$('#product_search').typeahead
+  name: "product"
+  remote: "/stok/products/autocomplete?query=%QUERY"
+  
+  
+RoadMap
+-----------------------
+More features
+
+Develop reports
+
+Write Tests
+
+Contributing
+-----------------------
+Everyone is encouraged to help improve this project. Here are a few ways you can help:
+
+Report bugs
+
+Fix bugs and submit pull requests
+
+Write, clarify, or fix documentation
+
+Suggest or add new features
+
+To get started with development and testing:
+
+git clone github.com/jcottobboni/inventorymaster.git
+
+Add gem 'inventorymaster',path:=> '../inventorymaster'
+
+to you current project and follow steps in the up this file for implement inventory system in your project.
+
+Enjoy!!!
+
+License
+-------
+
+inventorymaster is Copyright © 2015-2015 João Carlos Ottobboni. It is free
+software, and may be redistributed under the terms specified in the
+[LICENSE](/LICENSE) file.
+
+

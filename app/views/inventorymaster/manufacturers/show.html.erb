@@ -1,0 +1,13 @@
+
+<p>
+  <strong>Nome:</strong>
+  <%= @manufacturer.name %>
+</p>
+
+<p>
+  <strong>CNPJ:</strong>
+  <%= @manufacturer.cnpj %>
+</p>
+
+<%= link_to 'Editar', edit_manufacturer_path(@manufacturer) ,:class=>"btn btn-warning"%> |
+<%= link_to 'Voltar', manufacturers_path ,:class=>"btn  btn-default"%>
