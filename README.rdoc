@@ -1,15 +1,16 @@
 
-# inventorymaster  {<img src="https://gemnasium.com/jcottobboni/inventorymaster.svg" alt="Dependency Status" />}[https://gemnasium.com/jcottobboni/inventorymaster] {<img src="https://codeclimate.com/github/jcottobboni/inventorymaster/badges/gpa.svg" />}[https://codeclimate.com/github/jcottobboni/inventorymaster]
+## inventorymaster
+{<img src="https://travis-ci.org/jcottobboni/inventorymaster.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/jcottobboni/inventorymaster]{<img src="https://gemnasium.com/jcottobboni/inventorymaster.svg" alt="Dependency Status" />}[https://gemnasium.com/jcottobboni/inventorymaster] {<img src="https://codeclimate.com/github/jcottobboni/inventorymaster/badges/gpa.svg" />}[https://codeclimate.com/github/jcottobboni/inventorymaster]
 
 Inventory master provides a engine for implements basic inventory system control.
 
-Documentation
+##Documentation
 -------------
 
 You should find the documentation for your version of inventorymaster on [Rubygems](https://rubygems.org/gems/inventorymaster).
 
 
-Install
+##Install
 --------
 
 ```ruby
@@ -20,14 +21,14 @@ or add the following line to Gemfile:
 ```ruby
 gem 'inventorymaster'
 ```
-and run `bundle install` from your shell.After this all migrations inside a engine stay displonible in main 
+and run `bundle install` from your shell.After this all migrations inside a engine stay displonible in main
 
 and run `rake db:migrate` from your shell
 
 Add to your routes file.
-```ruby
+´´´ruby
 mount Inventorymaster::Engine, :at => '/stok'
-```
+´´´
 Aftere this the system is ready paste this code in application.html.erb to see and navigate in the app.
 
 ```html
@@ -44,7 +45,7 @@ Supported Ruby versions
 
 The inventorymaster supports rails 4.X.
 
-For search in products
+##For search in products
 -----------------------
 You need install Elastic search first
 
@@ -63,9 +64,9 @@ $ ->
 $('#product_search').typeahead
   name: "product"
   remote: "/stok/products/autocomplete?query=%QUERY"
-  
-  
-RoadMap
+
+
+##RoadMap
 -----------------------
 More features
 
@@ -73,7 +74,7 @@ Develop reports
 
 Write Tests
 
-Contributing
+##Contributing
 -----------------------
 Everyone is encouraged to help improve this project. Here are a few ways you can help:
 
@@ -95,7 +96,7 @@ to you current project and follow steps in the up this file for implement invent
 
 Enjoy!!!
 
-License
+##License
 -------
 
 inventorymaster is Copyright © 2015-2015 João Carlos Ottobboni. It is free
