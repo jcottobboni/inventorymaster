@@ -14,3 +14,4 @@ namespace :test do
     t.pattern = "test/**/*_test.rb"
   end
   # ...
+end
