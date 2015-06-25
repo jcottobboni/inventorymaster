@@ -5,3 +5,5 @@ rvm:
   - 2.1.2
 
 script: 'bundle exec rake'
+git:
+  depth: 150
